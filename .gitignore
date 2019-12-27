@@ -66,3 +66,7 @@ buildNumber.properties
 
 # Icon must end with two \r
 Icon
+
+ResourceRoom-App.iml
+.idea/
+

@@ -1,5 +1,8 @@
 # CHANGE LOG
 
+## 12/26/19:
+- Wrote SQL for all DAO interfaces.
+
 ## 12/23/19:
 - Create POJO classes for DB tables.
 - Created RowMapper classes to map POJOs to SQL results.

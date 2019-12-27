@@ -5,15 +5,15 @@ import org.jdbi.v3.core.mapper.reflect.ColumnName;
 public class Rating {
 
 	private int id;
-	private String title;
-	private int topic_id;
+	private String type;
+	private int rated_obj_id;
 	private int rate;
 	
-	public Rating(int id, String title, int topic_id, int rate) {
+	public Rating(int id, String type, int rated_obj_id, int rate) {
 		super();
 		this.id = id;
-		this.title = title;
-		this.topic_id = topic_id;
+		this.type = type;
+		this.rated_obj_id = rated_obj_id;
 		this.rate = rate;
 	}
 
@@ -26,22 +26,22 @@ public class Rating {
 		this.id = id;
 	}
 
-	@ColumnName("title")
-	public String getTitle() {
-		return title;
+	@ColumnName("type")
+	public String getType() {
+		return type;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	@ColumnName("topic_id")
-	public int getTopic_id() {
-		return topic_id;
+	@ColumnName("rated_obj_id")
+	public int getRated_obj_id() {
+		return rated_obj_id;
 	}
 
-	public void setTopic_id(int topic_id) {
-		this.topic_id = topic_id;
+	public void setRated_obj_id(int rated_obj_id) {
+		this.rated_obj_id = rated_obj_id;
 	}
 
 	@ColumnName("rate")

@@ -11,7 +11,14 @@ import com.theresourceroom.api.models.License;
 public class LicenceMapper implements RowMapper<License> {
 
 	public License map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new License(rs.getInt("num"), rs.getDate("purchased"), rs.getDate("expires"), rs.getString("role"));
+		return new License(
+				rs.getInt("num"),
+				rs.getDate("purchased"),
+				rs.getDate("expires"),
+				rs.getInt("purchased_by"),
+				rs.getString("role")
+		);
 	}
-
 }
+
+

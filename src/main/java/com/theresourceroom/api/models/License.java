@@ -7,15 +7,17 @@ public class License {
 	
 	private int num;
 	private Date purchased;
+	private int purchased_by;
 	private Date expires;
 	private String role;
 	
-	public License(int num, Date purchased, Date expires, String role) {
+	public License(int num, Date purchased, Date expires, int purchased_by, String role) {
 		super();
 		this.num = num;
 		this.purchased = purchased;
 		this.expires = expires;
 		this.role = role;
+		this.purchased_by = purchased_by;
 	}
 
 	@ColumnName("num")
@@ -52,6 +54,14 @@ public class License {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getPurchased_by() {
+		return purchased_by;
+	}
+
+	public void setPurchased_by(int purchased_by) {
+		this.purchased_by = purchased_by;
 	}
 
 
