@@ -1,8 +1,6 @@
 package com.theresourceroom.api.dal.dao;
 
 import java.util.Date;
-import java.util.List;
-
 import com.theresourceroom.api.dal.mapper.SessionMapper;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;

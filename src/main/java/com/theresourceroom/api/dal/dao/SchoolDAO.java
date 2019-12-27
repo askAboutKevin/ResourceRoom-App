@@ -25,8 +25,8 @@ public interface SchoolDAO {
 	@SqlUpdate("INSERT INTO School (name, street_address, city, zip_code, country, nces_number, code_hash VALUES (?, ?, ?, ?, ?, ?, ?)")
 	int addSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash);
 
-	@SqlUpdate("UPDATE School SET name = ?, street_address = ?, city = ?, zip_code = ?, country = ?, nces_number = ?, code_hash = ?")
-	int updateSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash);
+	@SqlUpdate("UPDATE School SET name = ?, street_address = ?, city = ?, zip_code = ?, country = ?, nces_number = ?, code_hash = ? WHERE id = ?")
+	int updateSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash, int id);
 
 	@SqlUpdate("DELETE FROM School WHERE id = ?")
 	int deleteSchool(int id);

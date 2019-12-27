@@ -10,35 +10,37 @@ import java.util.List;
 
 public interface RatingDAO {
 
-	@SqlQuery("SELECT id, title, rated_obj_id, rate FROM Rating WHERE user_id = ? AND title = 'PARENT' ")
+	@SqlQuery("SELECT id, type, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? AND type = 'PARENT' ")
 	@RegisterRowMapper(RatingMapper.class)
-	List<Rating> getAllRatingsOfParent(int id, String title);
+	List<Rating> getAllRatingsOfParent(int id);
 
-	@SqlQuery("SELECT id, title, rated_obj_id, rate FROM Rating WHERE user_id = ? AND rated_obj_id = ? AND title = 'PARENT' ")
+	@SqlQuery("SELECT id, type, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? AND topic_id = ? AND type = 'PARENT' ")
 	@RegisterRowMapper(RatingMapper.class)
-	Rating getRatingOfParentInTopic(int id, String title);
+	Rating getRatingOfParentInTopic(int id, int topic_id);
 
-	@SqlQuery("SELECT id, title, rated_obj_id, rate FROM Rating WHERE user_id = ? AND title = 'STUDENT' ")
+	@SqlQuery("SELECT id, type, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? AND type = 'STUDENT' ")
 	@RegisterRowMapper(RatingMapper.class)
 	List<Rating> getAllRatingsOfStudent(int id);
 
-	@SqlQuery("SELECT id, title, rated_obj_id, rate FROM Rating WHERE user_id = ? AND rated_obj_id = ? AND title = 'STUDENT' ")
+	@SqlQuery("SELECT id, type, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? AND topic_id = ? AND type = 'STUDENT' ")
 	@RegisterRowMapper(RatingMapper.class)
-	Rating getRatingOfStudentInTopic(int id, int topic);
+	Rating getRatingOfStudentInTopic(int id, int topic_id);
 
-	@SqlQuery("SELECT id, title, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? and title = 'ARTICLE' ")
+	@SqlQuery("SELECT id, type, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? and type = 'ARTICLE' ")
 	@RegisterRowMapper(RatingMapper.class)
-	List<Rating> getRatingOfArticle(int id, String title);
+	List<Rating> getRatingOfArticle(int id);
 	
-	@SqlQuery("SELECT id, title, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? AND topic_id = ?")
+	@SqlQuery("SELECT id, type, rated_obj_id, rate FROM Rating WHERE rated_obj_id = ? AND type = ?")
 	@RegisterRowMapper(RatingMapper.class)
-	Rating getRatingInTopic(int user_id, int rated_obj_id);
+	Rating getRatingInTopic(int rated_obj_id, String type);
 
-	@SqlUpdate("INSERT INTO Ratings (title, rated_obj_id, rate) VALUES (?, ?, ?)")
-	int rateUserInTopic(String title, int rated_obj_id, int rate);
+	@SqlUpdate("INSERT INTO Rating (type, rated_obj_id, rate) VALUES (?, ?, ?)")
+	int rateUserInTopic(String type, int rated_obj_id, int rate);
 
 	@SqlUpdate("UPDATE Rating SET rate = ? WHERE id = ?")
 	int updateRating(int rate, int id);
 
+	@SqlUpdate("DELETE FROM Rating WHERE id = ?")
+	int deleteRating(int id);
 
 }

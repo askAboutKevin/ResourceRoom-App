@@ -21,7 +21,7 @@ public interface LicenseDAO {
 	@RegisterRowMapper(LicenceMapper.class)
 	List<License> getLicensesForRoleFromSchool(String role, int school_id);
 
-	@SqlQuery("SELECT num, purchased, expires, puchased_by, role FROM License WHERE id = ?")
+	@SqlQuery("SELECT num, purchased, expires, puchased_by, role FROM License WHERE num = ?")
 	@RegisterRowMapper(LicenceMapper.class)
 	License getLicenseByNum(int num);
 	
@@ -32,6 +32,6 @@ public interface LicenseDAO {
 	@RegisterRowMapper(LicenceMapper.class)
 	License getUnusedLicenseForRole(int school, String role);
 
-	@SqlUpdate("UPDATE License SET expires = ? WHERE id = ?")
-	int cancelLicense();
+	@SqlUpdate("UPDATE License SET expires = CURRENT_TIMESTAMP() WHERE num = ?")
+	int cancelLicense(int num);
 }
