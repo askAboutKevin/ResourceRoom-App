@@ -1,11 +1,18 @@
 package com.theresourceroom.api.service.user;
 
+import com.theresourceroom.api.dal.dao.UserDAO;
 import com.theresourceroom.api.models.User;
 
 import java.util.Date;
 import java.util.List;
 
 public class UserServiceWebImpl implements UserService {
+
+    private UserDAO userDAO;
+
+    public UserServiceWebImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     public User getUserById(int id) {
@@ -14,37 +21,53 @@ public class UserServiceWebImpl implements UserService {
 
     @Override
     public List<User> getUsers() {
-        return null;
+        List<User> users = this.userDAO.getUsers();
+        return users;
     }
 
     @Override
     public List<User> getParents() {
-        return null;
+        List<User> parents = this.userDAO.getParents();
+        return parents;
     }
 
     @Override
     public List<User> getTeachers() {
-        return null;
+        List<User> teachers = this.userDAO.getTeachers();
+        return teachers;
     }
 
     @Override
     public List<User> getParentsFromSchool(int school) {
-        return null;
-    }
+        List<User> parents = this.userDAO.getParentsFromSchool(school);
+        return parents;    }
 
     @Override
     public List<User> getTeachersFromSchool(int school) {
-        return null;
+        List<User> parents = this.userDAO.getTeachersFromSchool(school);
+        return parents;
     }
 
     @Override
-    public int createUser(Date today, String first_name, String last_name, int school, String salt, String password_hash, int license_used, String role) {
-        return 0;
+    public int createUser(String first_name, String last_name, int school, String password_hash, String email, String role) {
+
+        int added = this.userDAO.createUser(first_name, last_name, school, "salt", password_hash, email, 1, role);
+        return added;
     }
 
     @Override
-    public int updateUser(String first_name, String last_name, String email, Date last_logged_in, Date last_logged_off, int license_used, int id) {
-        return 0;
+    public int updateUser(String first_name, String last_name, String email, String password, int license_used, int id) {
+
+        java.util.Date dt = new java.util.Date();
+
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String currentTime = sdf.format(dt);
+
+
+        int updated = this.userDAO.updateUser(first_name, last_name, email, currentTime, currentTime, 9, id);
+        return updated;
     }
 
     @Override

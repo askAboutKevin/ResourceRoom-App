@@ -17,5 +17,5 @@ public interface LicenseService {
 
     License getUnusedLicenseForRole(int school, String role);
 
-    int cancelLicense(int num);
+    boolean cancelLicense(int num);
 }

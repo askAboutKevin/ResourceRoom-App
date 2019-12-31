@@ -11,7 +11,7 @@ import com.theresourceroom.api.models.Student;
 public class StudentMapper implements RowMapper<Student> {
 
 	public Student map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new Student(rs.getInt("id"), rs.getInt("teacher"), rs.getInt("parent"), rs.getInt("license_used"));
+		return new Student(rs.getInt("id"), rs.getString("name"), rs.getInt("teacher"), rs.getInt("parent"), rs.getInt("license_used"));
 	}
 
 }

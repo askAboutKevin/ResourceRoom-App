@@ -29,7 +29,7 @@ public class StudentServiceWebImpl implements  StudentService {
     }
 
     @Override
-    public int addStudent(int parent_id, int teacher_id, String name) {
+    public Student addStudent(int parent_id, int teacher_id, String name) {
         return studentDAO.addStudent(parent_id, teacher_id, name);
     }
 

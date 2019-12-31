@@ -5,10 +5,19 @@ import org.jdbi.v3.core.mapper.reflect.ColumnName;
 public class Student {
 
 	private int id;
+	private String name;
 	private int teacher;
 	private int parent;
 	private int license_used;
-	
+
+	public Student(int id, String name, int teacher, int parent, int license_used) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.parent = parent;
+		this.license_used = license_used;
+	}
+
 	@ColumnName("id")
 	public int getId() {
 		return id;
@@ -45,14 +54,12 @@ public class Student {
 		this.license_used = license_used;
 	}
 
-	public Student(int id, int teacher, int parent, int license_used) {
-		super();
-		this.id = id;
-		this.teacher = teacher;
-		this.parent = parent;
-		this.license_used = license_used;
+	@ColumnName("name")
+	public String getName() {
+		return name;
 	}
-	
-	
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

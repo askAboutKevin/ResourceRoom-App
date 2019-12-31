@@ -7,15 +7,15 @@ import org.jdbi.v3.core.mapper.reflect.ColumnName;
 public class User {
 
 	private int id;
-	private Date registered;
+	private String registered;
 	private String first_name;
 	private String last_name;
 	private int school;
 	private String salt;
 	private String password_hash;
 	private String email;
-	private Date last_logged_in;
-	private Date last_logged_off;
+	private String last_logged_in;
+	private String last_logged_off;
 	private int license_used;
 	private String role;
 	
@@ -30,12 +30,12 @@ public class User {
 	}
 
 	@ColumnName("registered")
-	public Date getRegistered() {
+	public String getRegistered() {
 		return registered;
 	}
 
 
-	public void setRegistered(Date registered) {
+	public void setRegistered(String registered) {
 		this.registered = registered;
 	}
 
@@ -100,22 +100,22 @@ public class User {
 	}
 
 	@ColumnName("last_logged_in")
-	public Date getLast_logged_in() {
+	public String getLast_logged_in() {
 		return last_logged_in;
 	}
 
 
-	public void setLast_logged_in(Date last_logged_in) {
+	public void setLast_logged_in(String last_logged_in) {
 		this.last_logged_in = last_logged_in;
 	}
 
 	@ColumnName("last_logged_off")
-	public Date getLast_logged_off() {
+	public String getLast_logged_off() {
 		return last_logged_off;
 	}
 
 
-	public void setLast_logged_off(Date last_logged_off) {
+	public void setLast_logged_off(String last_logged_off) {
 		this.last_logged_off = last_logged_off;
 	}
 
@@ -140,8 +140,8 @@ public class User {
 	}
 
 
-	public User(int id, Date registered, String first_name, String last_name, int school, String salt,
-			String password_hash, String email, Date last_logged_in, Date last_logged_off, int license_used,
+	public User(int id, String registered, String first_name, String last_name, int school, String salt,
+			String password_hash, String email, String last_logged_in, String last_logged_off, int license_used,
 			String role) {
 		super();
 		this.id = id;

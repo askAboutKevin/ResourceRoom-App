@@ -12,7 +12,7 @@ public interface StudentService {
 
     Student getChildrenOfParent(int parent_id);
 
-    int addStudent(int parent_id, int teacher_id, String name);
+    Student addStudent(int parent_id, int teacher_id, String name);
 
     int updateStudentInfo(String name, int teacher_id, int parent_id, int id);
 

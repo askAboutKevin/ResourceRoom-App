@@ -35,11 +35,11 @@ public interface UserDAO {
 	@RegisterRowMapper(UserMapper.class)
 	List<User> getTeachersFromSchool(int school);
 
-	@SqlUpdate("INSERT INTO User (first_name, last_name, school, salt, password_hash, email, last_logged_in, last_logged_off, license_used, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?")
-	int createUser(Date today, String first_name, String last_name, int school, String salt, String password_hash, int license_used, String role);
+	@SqlUpdate("INSERT INTO User (first_name, last_name, school, salt, password_hash, email, last_logged_in, last_logged_off, license_used, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?")
+	int createUser(String first_name, String last_name, int school, String salt, String password_hash, String email, int license_used, String role);
 
 	@SqlUpdate("UPDATE User SET first_name = ?, last_name = ?, school = ?, salt = ?, password_hash = ?, email = ?, last_logged_in = ?, last_logged_off = ?, license_used = ? WHERE ID = ?")
-	int updateUser(String first_name, String last_name, String email, Date last_logged_in, Date last_logged_off, int license_used, int id);
+	int updateUser(String first_name, String last_name, String email, String last_logged_in, String last_logged_off, int license_used, int id);
 
 	@SqlUpdate("DELETE FROM User WHERE ID = ?")
 	int deleteUser(int id);
