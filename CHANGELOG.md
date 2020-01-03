@@ -4,6 +4,8 @@
 - Updated POM, config.yml and Configuration.java files
 - Finished Resource layer.
 - Updated Service layer.
+- Fixing bug with gitignore.
+
 
 ## 12/27/19:
 - Finished Service layer.
