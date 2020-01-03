@@ -1,5 +1,10 @@
 # CHANGE LOG
 
+## 1/3/20:
+- Updated POM, config.yml and Configuration.java files
+- Finished Resource layer.
+- Updated Service layer.
+
 ## 12/27/19:
 - Finished Service layer.
 - Began creating resources.

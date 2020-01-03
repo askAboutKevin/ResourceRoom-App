@@ -18,6 +18,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import com.theresourceroom.api.models.License;
 import com.theresourceroom.api.service.user.UserService;
 import com.theresourceroom.api.models.User;
 
@@ -122,7 +124,7 @@ public class UserResource {
     }
 
     @POST
-    public Response createUser(User user) {
+    public Response createUser(User user,  List<License> licenses) {
 
         String first_name = user.getFirst_name();
         String last_name = user.getLast_name();
@@ -132,7 +134,7 @@ public class UserResource {
         String email = user.getEmail();
         Boolean success = Boolean.FALSE;
 
-        int countAdded = this.userService.createUser(first_name, last_name, school, password_hash, email, role);
+        int countAdded = this.userService.createUser(first_name, last_name, school, password_hash, email, licenses, role);
 
         if(countAdded == 1) {
             success = Boolean.TRUE;
@@ -147,7 +149,6 @@ public class UserResource {
     @PUT
     @Path("/{id}")
     public Response updateUser(User user, @PathParam("id") int id) {
-
         String first_name = user.getFirst_name();
         String last_name = user.getLast_name();
         String password = user.getPassword_hash();
@@ -155,11 +156,8 @@ public class UserResource {
         String email = user.getEmail();
         String last_logged_in = user.getLast_logged_in();
         String last_logged_off = user.getLast_logged_off();
-
         Boolean success;
-
         int countUpdated = this.userService.updateUser(first_name, last_name, email, password, license_used, id);
-
         if (countUpdated == 1) {
             success = Boolean.TRUE;
 

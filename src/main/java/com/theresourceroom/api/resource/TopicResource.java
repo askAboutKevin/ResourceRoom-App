@@ -33,8 +33,6 @@ public class TopicResource {
         this.topicService = topicService;
     }
 
-    int updateTopic(String name, int topic_id);
-
     @GET
     public Response fetchTopicsFromSchool(@QueryParam("school") int id) {
 

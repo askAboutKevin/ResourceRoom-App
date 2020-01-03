@@ -1,6 +1,7 @@
 package com.theresourceroom.api.service.user;
 
 import com.theresourceroom.api.dal.mapper.UserMapper;
+import com.theresourceroom.api.models.License;
 import com.theresourceroom.api.models.User;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
@@ -23,7 +24,7 @@ public interface UserService {
 
     List<User> getTeachersFromSchool(int school);
 
-    int createUser(String first_name, String last_name, int school, String password_hash, String email, String role);
+    int createUser(String first_name, String last_name, int school, String password_hash, String email, List<License> licenses, String role);
 
     int updateUser(String first_name, String last_name, String email, String password, int license_used, int id);
 

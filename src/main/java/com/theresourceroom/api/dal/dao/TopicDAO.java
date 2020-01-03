@@ -16,7 +16,7 @@ public interface TopicDAO {
 
 	@SqlQuery("SELECT id, name, school FROM Topic WHERE id IN (SELECT topic_id FROM Rating WHERE rate <= 3 AND user_id = ? AND title = ?)")
 	@RegisterRowMapper(TopicMapper.class)
-	Topic getWeakTopicsOfType(int _id, String type);
+	List<Topic> getWeakTopicsOfType(int _id, String type);
 
 	@SqlUpdate("INSERT INTO Topic (name, school) VALUES (?, ?)")
 	int AddNewTopic(String name, int school);

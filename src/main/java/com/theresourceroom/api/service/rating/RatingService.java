@@ -21,5 +21,5 @@ public interface RatingService {
 
     int updateRating(int rate, int id);
 
-    int deleteRating(int id);
+    boolean deleteRating(int id);
 }

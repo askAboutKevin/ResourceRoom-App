@@ -8,7 +8,7 @@ public interface TopicService {
 
     List<Topic> getTopicsFromSchool(int school);
 
-    Topic getWeakTopicsOfType(int _id, String type);
+    List<Topic> getWeakTopicsOfType(int _id, String type);
 
     int AddNewTopic(String name, int school);
 
