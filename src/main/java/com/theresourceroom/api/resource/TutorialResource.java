@@ -106,6 +106,7 @@ import com.theresourceroom.api.models.Tutorial;
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
+    @PUT
     @Path("/{id}")
     public Response updateTutorial(@PathParam("id") int id, Tutorial tutorial) {
         String name = tutorial.getName(), link_image = tutorial.getLink_image(), link_story = tutorial.getLink_story();

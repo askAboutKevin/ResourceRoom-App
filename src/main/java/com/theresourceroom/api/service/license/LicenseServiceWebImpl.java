@@ -39,18 +39,19 @@ public class LicenseServiceWebImpl implements LicenseService {
     }
 
     @Override
-    public int createLicense(Date purchased, int purchased_by, String role) {
+    public int createLicense(int purchased_by, String role) {
         role = role.strip().toUpperCase();
-        if(purchased_by < 1 || !role.matches("TEACHER") || !role.matches("ADMIN") || !role.matches("STUDENT") || !role.matches("PARENT")) {
+        if(purchased_by < 1 && (role.matches("TEACHER") || role.matches("ADMIN") || role.matches("STUDENT") || role.matches("PARENT")) ) {
+            System.out.println(role);
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        return licenseDAO.createLicense(purchased, purchased_by, role);
+        return licenseDAO.createLicense(purchased_by, role);
     }
 
     @Override
     public License getUnusedLicenseForRole(int school, String role) {
         role = role.strip().toUpperCase();
-        if(school < 1 || !role.matches("TEACHER") || !role.matches("ADMIN") || !role.matches("STUDENT") || !role.matches("PARENT")) {
+        if(school < 1 && (role.matches("TEACHER") || role.matches("ADMIN") || role.matches("STUDENT") || role.matches("PARENT")) ) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return licenseDAO.getUnusedLicenseForRole(school, role);

@@ -99,6 +99,7 @@ public class TopicResource {
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
+    @PUT
     @Path("/{id}")
     public Response updateTopic(@PathParam("id") int id, @QueryParam("school") String name) {
 

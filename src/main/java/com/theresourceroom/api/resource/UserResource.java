@@ -124,46 +124,43 @@ public class UserResource {
     }
 
     @POST
-    public Response createUser(User user,  List<License> licenses) {
+    public Response createUser(User user) {
 
-        String first_name = user.getFirst_name();
-        String last_name = user.getLast_name();
-        int school = user.getSchool();
-        String password_hash = user.getPassword_hash();
-        String role = user.getRole();
-        String email = user.getEmail();
         Boolean success = Boolean.FALSE;
 
-        int countAdded = this.userService.createUser(first_name, last_name, school, password_hash, email, licenses, role);
+        User user1 = this.userService.createUser(
+                user.getFirst_name(),
+                user.getLast_name(),
+                user.getSchool(),
+                user.getPassword_hash(),
+                user.getEmail(),
+                user.getLicense_used(),
+                user.getRole());
 
-        if(countAdded == 1) {
-            success = Boolean.TRUE;
+        if(user1 != null) {
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(user1)
+                    .build();
         }
-
-        return Response
-                .status(Response.Status.OK)
-                .entity(success)
-                .build();
+        throw new WebApplicationException(Status.NOT_FOUND);
     }
 
     @PUT
     @Path("/{id}")
     public Response updateUser(User user, @PathParam("id") int id) {
-        String first_name = user.getFirst_name();
-        String last_name = user.getLast_name();
-        String password = user.getPassword_hash();
-        int license_used = user.getLicense_used();
-        String email = user.getEmail();
-        String last_logged_in = user.getLast_logged_in();
-        String last_logged_off = user.getLast_logged_off();
-        Boolean success;
-        int countUpdated = this.userService.updateUser(first_name, last_name, email, password, license_used, id);
-        if (countUpdated == 1) {
-            success = Boolean.TRUE;
 
+        user = this.userService.updateUser(
+                user.getFirst_name(),
+                user.getLast_name(),
+                user.getEmail(),
+                user.getLicense_used(),
+                id);
+
+        if (user != null) {
             return Response
                     .status(Response.Status.OK)
-                    .entity(success)
+                    .entity(user)
                     .build();
         }
         throw new WebApplicationException(Status.NOT_FOUND);
@@ -171,7 +168,7 @@ public class UserResource {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteUser(int id) {
+    public Response deleteUser(@PathParam("id") int id) {
 
         int countDeleted = this.userService.deleteUser(id);
 
@@ -181,7 +178,7 @@ public class UserResource {
             success = Boolean.TRUE;
 
             return Response
-                    .status(Response.Status.OK)
+                    .status(Status.ACCEPTED)
                     .entity(success)
                     .build();
         }

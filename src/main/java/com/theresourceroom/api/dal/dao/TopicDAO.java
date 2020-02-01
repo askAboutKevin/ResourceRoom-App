@@ -14,7 +14,7 @@ public interface TopicDAO {
 	@RegisterRowMapper(TopicMapper.class)
 	List<Topic> getTopicsFromSchool(int school);
 
-	@SqlQuery("SELECT id, name, school FROM Topic WHERE id IN (SELECT topic_id FROM Rating WHERE rate <= 3 AND user_id = ? AND title = ?)")
+	@SqlQuery("SELECT id, name, school FROM Topic WHERE id IN (SELECT topic_id FROM Rating WHERE rate <= 3 AND rated_object_id = ? AND type = ?)")
 	@RegisterRowMapper(TopicMapper.class)
 	List<Topic> getWeakTopicsOfType(int _id, String type);
 

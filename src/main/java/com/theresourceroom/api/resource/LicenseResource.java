@@ -56,8 +56,8 @@ public class LicenseResource {
 
     @GET
     @Path("/new")
-    public Response fetchUnusedLicenseForRole(@QueryParam("school_id") OptionalInt school_id, @QueryParam("role") Optional<String> role) {
-        License license = this.licenseService.getUnusedLicenseForRole(school_id.getAsInt(), role.get());
+    public Response fetchUnusedLicenseForRole(@QueryParam("school_id") int school_id, @QueryParam("role") String role) {
+        License license = this.licenseService.getUnusedLicenseForRole(school_id, role);
         if(license != null) {
             return Response
                     .status(Response.Status.OK)
@@ -69,13 +69,12 @@ public class LicenseResource {
 
     @POST
     public Response License(License license) {
-        Date purchased = license.getPurchased();
         int purchased_by = license.getPurchased_by();
         String role = license.getRole();
 
         Boolean success = Boolean.FALSE;
 
-        int licenseCreated = this.licenseService.createLicense(purchased, purchased_by, role);
+        int licenseCreated = this.licenseService.createLicense(purchased_by, role);
 
         if(licenseCreated == 1) {
             success = Boolean.TRUE;
@@ -83,7 +82,8 @@ public class LicenseResource {
         return Response
                 .status(Response.Status.OK)
                 .entity(success)
-                .build();    }
+                .build();
+    }
 
 
     @DELETE

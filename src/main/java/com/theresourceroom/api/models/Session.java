@@ -2,6 +2,8 @@ package com.theresourceroom.api.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Session {
@@ -19,6 +21,15 @@ public class Session {
 		this.cookie = cookie;
 		this.started = started;
 		this.expires = expires;
+	}
+
+	// Constructor for incoming requests
+	@JsonCreator
+	public Session(@JsonProperty("user_id") int user_id, @JsonProperty("cookie") String cookie, @JsonProperty("started") Date started) {
+		super();
+		this.user_id = user_id;
+		this.cookie = cookie;
+		this.started = started;
 	}
 
 	@ColumnName("id")

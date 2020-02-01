@@ -57,35 +57,42 @@ public class UserServiceWebImpl implements UserService {
     }
 
     @Override
-    public int createUser(String first_name, String last_name, int school, String password, String email, List<License> licenses, String role) {
-        role = role.strip().toUpperCase();
-        if(school < 1 || !email.matches(".+@.+/..+") || !role.matches("TEACHER") || !role.matches("ADMIN") || !role.matches("STUDENT") || !role.matches("PARENT")) {
+    public User createUser(String first_name, String last_name, int school, String password, String email, int license_used, String role) {
+
+        if (school < 1) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
+
+        role = role.strip().toUpperCase();
         String salt = SecureSalt.generateSalt();
         String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
-        int added = 0;
-        for(int tries = 0; tries <= licenses.size(); tries++) {
-            added = this.userDAO.createUser(first_name, last_name, school, salt, hash, email, licenses.get(tries).getNum(), role);
-            if(added == 1) {
-                break;
-            }
+
+        int id = this.userDAO.createUser(first_name, last_name, school, salt, hash, email, license_used, role);
+        User user = this.userDAO.getUserById(id);
+        user.setSalt(null); user.setPassword_hash(null);
+
+        if(user == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return added;
+
+        return user;
     }
 
     @Override
-    public int updateUser(String first_name, String last_name, String email, String password, int license_used, int id) {
-        if(id < 1) {
+    public User updateUser(String first_name, String last_name, String email, int license_used, int id) {
+        if (id < 1 || license_used < 1) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentTime = sdf.format(dt);
 
-        int updated = this.userDAO.updateUser(first_name, last_name, email, currentTime, currentTime, 9, id);
-        return updated;
+        if (this.userDAO.updateUserNameAndEmail(first_name, last_name, email, license_used, id) == 1) {
+            return this.userDAO.getUserById(id);
+        }
+//      else if (password != null) {
+//          if(this.userDAO.updatePassword(hash, salt, id) == 1) {
+//              return this.userDAO.getUserById(id);
+//          }
+//    }
+        throw new WebApplicationException(Response.Status.NOT_MODIFIED);
     }
 
     @Override

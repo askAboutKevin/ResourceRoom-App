@@ -12,8 +12,6 @@ import io.dropwizard.logging.LoggingFactory;
 import io.dropwizard.metrics.MetricsFactory;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
-//import io.dropwizard.setup.AdminFactory;
-
 
 public class Configuration extends io.dropwizard.Configuration {
 
@@ -33,27 +31,39 @@ public class Configuration extends io.dropwizard.Configuration {
     @NotNull
     private DataSourceFactory database = new DataSourceFactory();
 
-    //    @Valid
-    //    @NotNull
-    //    private AdminFactory admin = new AdminFactory();
-
     @JsonProperty("database")
     public void setDataSourceFactory(DataSourceFactory factory) {
         this.database = factory;
+    }
+
+    @JsonProperty("logging")
+    public synchronized void setLoggingFactory(LoggingFactory factory) {
+        this.logging = factory;
+    }
+
+    @JsonProperty("server")
+    public void setServerFactory(ServerFactory factory) {
+        this.server = factory;
+    }
+
+    @JsonProperty("metrics")
+    public void setMetricsFactory(MetricsFactory metrics) {
+        this.metrics = metrics;
+    }
+
+    @JsonProperty("metrics")
+    public MetricsFactory getMetricsFactory() {
+        return metrics;
     }
 
     @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
         return database;
     }
+
     @JsonProperty("server")
     public ServerFactory getServerFactory() {
         return server;
-    }
-
-    @JsonProperty("server")
-    public void setServerFactory(ServerFactory factory) {
-        this.server = factory;
     }
 
     @JsonProperty("logging")
@@ -63,21 +73,6 @@ public class Configuration extends io.dropwizard.Configuration {
             logging = new DefaultLoggingFactory();
         }
         return logging;
-    }
-
-    @JsonProperty("logging")
-    public synchronized void setLoggingFactory(LoggingFactory factory) {
-        this.logging = factory;
-    }
-
-    @JsonProperty("metrics")
-    public MetricsFactory getMetricsFactory() {
-        return metrics;
-    }
-
-    @JsonProperty("metrics")
-    public void setMetricsFactory(MetricsFactory metrics) {
-        this.metrics = metrics;
     }
 
     @Override

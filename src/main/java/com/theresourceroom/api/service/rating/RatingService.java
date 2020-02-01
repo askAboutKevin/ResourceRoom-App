@@ -17,7 +17,7 @@ public interface RatingService {
 
     Rating getRatingInTopic(int rated_obj_id, String type);
 
-    int rateUserInTopic(String type, int rated_obj_id, int rate);
+    int rateUserInTopic(String type, int rated_obj_id, int rate, int topic_id);
 
     int updateRating(int rate, int id);
 

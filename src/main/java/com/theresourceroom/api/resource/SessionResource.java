@@ -31,7 +31,9 @@ public class SessionResource {
                 .build();
     }
 
-    public Response renewSession(String cookie) {
+    @PUT
+    public Response renewSession(Session session) {
+        String cookie = session.getCookie();
         int sessionRenewed = this.sessionService.renewSession(cookie);
 
         Boolean success = Boolean.FALSE;
@@ -46,7 +48,12 @@ public class SessionResource {
                 .build();
     }
 
-    public Response createNewSession(int user_id, String cookie, Date start) {
+    @POST
+    public Response createNewSession(Session session) {
+
+        int user_id = session.getUser_id();
+        String cookie = session.getCookie();
+        Date start = session.getStarted();
 
         int sessionCreated = this.sessionService.createNewSession(user_id, cookie, start);
 

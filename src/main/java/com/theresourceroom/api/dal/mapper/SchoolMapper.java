@@ -16,8 +16,9 @@ public class SchoolMapper implements RowMapper<School> {
 					rs.getDate("registered"), 
 					rs.getString("name"), 
 					rs.getString("street_address"),
-					rs.getString("city"), 
-					rs.getString("zipcode"), 
+					rs.getString("city"),
+					rs.getString("state"),
+					rs.getString("zip_code"),
 					rs.getString("country"), 
 					rs.getString("nces_number"), 
 					rs.getString("code_hash")

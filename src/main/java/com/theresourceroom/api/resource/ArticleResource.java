@@ -32,7 +32,6 @@ public class ArticleResource {
     @GET
     public Response fetchArticles(@QueryParam("topic") OptionalInt topicId) {
 
-
         if (!topicId.isEmpty()) {
             List<Article> articles = this.articleService.getArticlesInTheme(topicId.getAsInt());
 

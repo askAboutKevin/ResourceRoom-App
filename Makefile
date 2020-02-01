@@ -33,6 +33,7 @@ compile: clean resolve ## Builds the source files and creates a JAR
 	mvn package
 
 server: ## Runs the application as an HTTP Server. This command requires a configuration file
+
 	java -jar $(BUILD)/$(JAR_NAME) server $(SERVER_CONF)
 
 version: ## Displays the current version of the application

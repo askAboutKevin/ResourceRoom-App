@@ -21,50 +21,93 @@ public class RatingResource {
     }
 
     @GET
-    Response getAllRatingsOfUser(@QueryParam("id") int id, @QueryParam("role") String role)  {
-        if(id >= 1 && !role.isEmpty()) {
+    @Path("/{topic}")
+    public Response getAllRatingsOfUser(@QueryParam("id") int id, @QueryParam("role") String role, @PathParam("topic") int topic)  {
+        List<Rating> ratings = null;
+        System.out.println(role);
 
+        if(role.matches("parent")) {
+            if(topic != 0) {
+                Rating rating = ratingService.getRatingOfParentInTopic(id, topic);
+                if(rating != null) {
+                    return Response
+                            .status(Response.Status.OK)
+                            .entity(rating)
+                            .build();
+                }
+            }
+            ratings = ratingService.getAllRatingsOfParent(id);
+        }
+        else if(role.matches("student")) {
+            if(topic != 0) {
+                Rating rating = ratingService.getRatingOfStudentInTopic(id, topic);
+                if(rating != null) {
+                    return Response
+                            .status(Response.Status.OK)
+                            .entity(rating)
+                            .build();
+                }
+            }
+            ratings = ratingService.getAllRatingsOfStudent(id);
+        }
+        else if(role.matches("article")) {
+            ratings = ratingService.getRatingOfArticle(id);
+        }
+
+        if(ratings != null) {
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(ratings)
+                    .build();
         }
         throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
 
-    Response getRatingOfParentInTopic(int id, int topic_id) {
+    @POST
+    public Response rateUserInTopic(Rating rating) {
 
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        String type = rating.getType();
+        int rated_obj_id = rating.getRated_object_id();
+        int topic = rating.getTopic_id();
+        int rate = rating.getRate();
+
+        Boolean success = Boolean.FALSE;
+
+        int ratedSuccess = this.ratingService.rateUserInTopic(type, rated_obj_id, rate, topic);
+
+        if(ratedSuccess == 1) {
+            success = Boolean.TRUE;
+        }
+        return Response
+                .status(Response.Status.OK)
+                .entity(success)
+                .build();
     }
 
-    Response getAllRatingsOfStudent(int id) {
+    @PUT
+    @Path("/{id}")
+    public Response updateRating(@QueryParam("rate") int rate, @PathParam("id") int id) {
 
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        Boolean success = Boolean.FALSE;
+
+        int ratedSuccess = this.ratingService.updateRating(rate, id);
+        if(ratedSuccess == 1) {
+            success = Boolean.TRUE;
+        }
+        return Response
+                .status(Response.Status.OK)
+                .entity(success)
+                .build();
     }
 
-    Response getRatingOfStudentInTopic(int id, int topic_id) {
+    @DELETE
+    public Response deleteRating(int id) {
 
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
+        Boolean success = this.ratingService.deleteRating(id);
 
-    Response getRatingOfArticle(int id) {
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
-
-    Response getRatingInTopic(int rated_obj_id, String type) {
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
-
-    Response rateUserInTopic(String type, int rated_obj_id, int rate) {
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
-
-    Response updateRating(int rate, int id) {
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
-
-    Response deleteRating(int id) {
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.OK)
+                .entity(success)
+                .build();
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TutorialDAO {
 
-	@SqlQuery("SELECT id, name, school FROM Tutorial")
+	@SqlQuery("SELECT id, name, link_image, link_story FROM Tutorial")
 	@RegisterRowMapper(TutorialMapper.class)
 	List<Tutorial> getAllTutorials();
 
@@ -18,11 +18,11 @@ public interface TutorialDAO {
 	@RegisterRowMapper(TutorialMapper.class)
 	List<Tutorial> getAllTutorialsForTopic(int topic_id);
 
-	@SqlQuery("SELECT id, name, school FROM Tutorial WHERE id = ?")
+	@SqlQuery("SELECT id, name, link_image, link_story FROM Tutorial WHERE id = ?")
 	@RegisterRowMapper(TutorialMapper.class)
 	Tutorial getTutorialById(int id);
 
-	@SqlUpdate("INSERT INTO Tutorial (name, school) VALUES (?, ?)")
+	@SqlUpdate("INSERT INTO Tutorial (name, link_image, link_story) VALUES (?, ?, ?)")
 	int AddTutorial(String name, String link_image, String link_story);
 
 	@SqlUpdate("DELETE FROM Tutorial WHERE id = ?")

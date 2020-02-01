@@ -41,8 +41,8 @@ public class SchoolResource {
     }
 
     @GET
-    @Path("/{nces}")
-    public Response getSchoolByNcesNumber(@PathParam("nces")  String nces_number) {
+    @Path("nces/{nces}")
+    public Response getSchoolByNcesNumber(@PathParam("nces") String nces_number) {
         School school = this.schoolService.getSchoolByNcesNumber(nces_number);
 
         return Response
@@ -52,9 +52,18 @@ public class SchoolResource {
     }
 
     @POST
-    public Response addSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash) {
+    public Response addSchool(School school) {
 
-        int createdSchool = this.schoolService.addSchool(name, street_address, city, zipcode, country, nces_number, code_hash);
+        String name = school.getName();
+        String street_address = school.getStreet_address();
+        String city = school.getCity();
+        String state = school.getState();
+        String zipcode = school.getZipcode();
+        String country = school.getCountry();
+        String nces_number = school.getNces_number();
+        String code_hash = school.getCode_hash();
+
+        int createdSchool = this.schoolService.addSchool(name, street_address, city, state, zipcode, country, nces_number, code_hash);
 
         Boolean success = Boolean.FALSE;
 
@@ -68,9 +77,19 @@ public class SchoolResource {
     }
 
     @PUT
-    public Response updateSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash, int id) {
+    public Response updateSchool(School school) {
 
-        int updatedSchool = this.schoolService.updateSchool(name, street_address, city, zipcode, country, nces_number, code_hash, id);
+        String name = school.getName();
+        String street_address = school.getStreet_address();
+        String city = school.getCity();
+        String state = school.getState();
+        String zipcode = school.getZipcode();
+        String country = school.getCountry();
+        String nces_number = school.getNces_number();
+        String code_hash = school.getCode_hash();
+        int id = school.getId();
+
+        int updatedSchool = this.schoolService.updateSchool(name, street_address, city, state, zipcode, country, nces_number, code_hash, id);
         Boolean success = Boolean.FALSE;
 
         if(updatedSchool == 1) {
@@ -79,7 +98,7 @@ public class SchoolResource {
 
         return Response
                 .status(Response.Status.OK)
-                .entity(success)
+                .entity("success")
                 .build();
 
     }

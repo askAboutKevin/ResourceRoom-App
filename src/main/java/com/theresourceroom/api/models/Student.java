@@ -1,5 +1,7 @@
 package com.theresourceroom.api.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Student {
@@ -16,6 +18,14 @@ public class Student {
 		this.teacher = teacher;
 		this.parent = parent;
 		this.license_used = license_used;
+	}
+
+	// Constructor for incoming requests
+	@JsonCreator
+	public Student(@JsonProperty("name") String name, @JsonProperty("teacher") int teacher, @JsonProperty("parent") int parent) {
+		this.name = name;
+		this.teacher = teacher;
+		this.parent = parent;
 	}
 
 	@ColumnName("id")

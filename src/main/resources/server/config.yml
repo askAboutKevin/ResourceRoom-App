@@ -1,6 +1,6 @@
 database:
   # the name of your JDBC driver
-  driverClass: com.mysql.jdbc.Driver
+  driverClass: com.mysql.cj.jdbc.Driver
 
   # the username
   user: the_pr
@@ -9,7 +9,7 @@ database:
   password: west9!9storK
 
   # the JDBC URL
-  url: jdbc:mysql://localhost:3306/Resource?serverTimezone=America/New_York&useSSL=false
+  url: jdbc:mysql://127.0.0.1:3306/Resource?allowPublicKeyRetrieval=true&serverTimezone=America/New_York&useSSL=false
 
 server:
   # ports & protocol to run the application on
@@ -59,12 +59,6 @@ logging:
       archivedFileCount: 7
       timeZone: UTC
       maxFileSize: 10MiB
-
-# the key needs to match the configuration key of the renderer (ViewRenderer::getConfigurationKey)
-viewRendererConfiguration:
-  freemarker:
-    strict_syntax: yes
-    whitespace_stripping: yes
 
 #metrics:
 #  reporters:

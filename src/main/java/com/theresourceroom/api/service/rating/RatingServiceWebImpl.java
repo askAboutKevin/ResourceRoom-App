@@ -65,12 +65,12 @@ public class RatingServiceWebImpl implements RatingService {
     }
 
     @Override
-    public int rateUserInTopic(String type, int rated_obj_id, int rate) {
+    public int rateUserInTopic(String type, int rated_obj_id, int rate, int topic_id) {
         type = type.strip().toUpperCase();
-        if( rate < 1 || rate > 5 || rated_obj_id < 1 || !type.matches("TEACHER") || !type.matches("ADMIN") || !type.matches("STUDENT") || !type.matches("PARENT")) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-        return ratingDAO.rateUserInTopic(type, rated_obj_id, rate);
+//        if( rate < 1 || rate > 5 || rated_obj_id < 1 || !type.matches("TEACHER") || !type.matches("ADMIN") || !type.matches("STUDENT") || !type.matches("PARENT")) {
+//            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+//        }
+        return ratingDAO.rateUserInTopic(type, rated_obj_id, rate, topic_id);
     }
 
     @Override

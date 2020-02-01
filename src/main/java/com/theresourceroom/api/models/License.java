@@ -1,6 +1,9 @@
 package com.theresourceroom.api.models;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class License {
@@ -16,6 +19,14 @@ public class License {
 		this.num = num;
 		this.purchased = purchased;
 		this.expires = expires;
+		this.role = role;
+		this.purchased_by = purchased_by;
+	}
+
+	// Constructor for incoming requests
+	@JsonCreator
+	public License(@JsonProperty("purchased_by") int purchased_by, @JsonProperty("role") String role) {
+		super();
 		this.role = role;
 		this.purchased_by = purchased_by;
 	}
@@ -56,6 +67,7 @@ public class License {
 		this.role = role;
 	}
 
+	@ColumnName("purchased_by")
 	public int getPurchased_by() {
 		return purchased_by;
 	}

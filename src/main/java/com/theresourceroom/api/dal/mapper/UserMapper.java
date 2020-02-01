@@ -20,8 +20,8 @@ public class UserMapper implements RowMapper<User> {
 					rs.getString("salt"),
 					rs.getString("password_hash"), 
 					rs.getString("email"), 
-					rs.getString("last_logged_in"),
-					rs.getString("last_logged_off"),
+					rs.getDate("last_logged_in"),
+					rs.getDate("last_logged_off"),
 					rs.getInt("license_used"),
 					rs.getString("role")
 				);

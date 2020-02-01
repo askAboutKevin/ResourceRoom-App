@@ -11,7 +11,7 @@ import com.theresourceroom.api.models.Rating;
 public class RatingMapper implements RowMapper<Rating> {
 
 	public Rating map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new Rating(rs.getInt("id"), rs.getString("title"), rs.getInt("topic_id"), rs.getInt("rate"));
+		return new Rating(rs.getInt("id"), rs.getString("type"), rs.getInt("rated_object_id"), rs.getInt("topic_id"), rs.getInt("rate"));
 	}
 
 }

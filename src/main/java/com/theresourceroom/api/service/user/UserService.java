@@ -24,9 +24,9 @@ public interface UserService {
 
     List<User> getTeachersFromSchool(int school);
 
-    int createUser(String first_name, String last_name, int school, String password_hash, String email, List<License> licenses, String role);
+    User createUser(String first_name, String last_name, int school, String password, String email, int license_used, String role);
 
-    int updateUser(String first_name, String last_name, String email, String password, int license_used, int id);
+    User updateUser(String first_name, String last_name, String email, int license_used, int id);
 
     int deleteUser(int id);
 

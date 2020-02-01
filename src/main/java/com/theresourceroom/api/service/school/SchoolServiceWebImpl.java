@@ -29,12 +29,12 @@ public class SchoolServiceWebImpl implements SchoolService {
     }
 
     @Override
-    public int addSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash) {
-        return schoolDAO.addSchool(name, street_address, city, zipcode, country, nces_number, code_hash);
+    public int addSchool(String name, String street_address, String city, String state, String zipcode, String country, String nces_number, String code_hash) {
+        return schoolDAO.addSchool(name, street_address, city, state, zipcode, country, nces_number, code_hash);
     }
 
     @Override
-    public int updateSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash, int id) {
+    public int updateSchool(String name, String street_address, String city,  String state, String zipcode, String country, String nces_number, String code_hash, int id) {
         return schoolDAO.updateSchool(name, street_address, city, zipcode, country, nces_number, code_hash, id);
     }
 

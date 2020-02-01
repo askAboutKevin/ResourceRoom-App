@@ -1,5 +1,7 @@
 package com.theresourceroom.api.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Article {
@@ -17,7 +19,16 @@ public class Article {
 		this.link_story = link_story;
 		this.link_image = link_image;
 	}
-	
+
+	// Constructor for incoming requests
+	@JsonCreator
+	public Article(@JsonProperty("name") String name, @JsonProperty("link_story") String link_story, @JsonProperty("link_image") String link_image) {
+		super();
+		this.name = name;
+		this.link_story = link_story;
+		this.link_image = link_image;
+	}
+
 	@ColumnName("id")
 	public int getId() {
 		return id;

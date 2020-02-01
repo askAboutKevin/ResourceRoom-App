@@ -12,9 +12,9 @@ public interface SchoolService {
 
     School getSchoolByNcesNumber(String nces_number);
 
-    int addSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash);
+    int addSchool(String name, String street_address, String city, String state, String zipcode, String country, String nces_number, String code_hash);
 
-    int updateSchool(String name, String street_address, String city, String zipcode, String country, String nces_number, String code_hash, int id);
+    int updateSchool(String name, String street_address, String city, String state, String zipcode, String country, String nces_number, String code_hash, int id);
 
     int deleteSchool(int id);
 

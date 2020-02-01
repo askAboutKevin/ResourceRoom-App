@@ -13,7 +13,7 @@ public interface LicenseService {
 
     License getLicenseByNum(int num);
 
-    int createLicense(Date purchased, int purchased_by, String role);
+    int createLicense(int purchased_by, String role);
 
     License getUnusedLicenseForRole(int school, String role);
 
